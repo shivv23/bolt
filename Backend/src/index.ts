@@ -13,6 +13,10 @@ app.use(express.json());
 app.use('/template', templateRoutes);
 app.use('/chat', chatRoutes);
 
-app.listen(config.port, () => {
-  console.log(`Gemini server running on http://localhost:${config.port}`);
-});
+if (process.env.VERCEL) {
+  export default app;
+} else {
+  app.listen(config.port, () => {
+    console.log(`Gemini server running on http://localhost:${config.port}`);
+  });
+}
